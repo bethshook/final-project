@@ -1,0 +1,10 @@
+<nav>
+  <a [routerLink]="['home']"> Home </a>
+  |
+  <a [routerLink]="['signup']"> Signup </a>
+  |
+  <a [routerLink]="['login']"> Log in </a>
+  |
+  <a href="#!" (click)="logout()" > Logout </a>
+</nav>
+<router-outlet></router-outlet>
