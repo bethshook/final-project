@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,6 +10,7 @@ import {AuthService} from '../services/auth.service';
 })
 export class SignupComponent implements OnInit {
 
+  hasAccount: boolean = true
   email: string = ''
   password: string = ''
   auth: any = {
@@ -17,7 +19,9 @@ export class SignupComponent implements OnInit {
   } //object used for all authentication
   user = ''
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -30,6 +34,17 @@ export class SignupComponent implements OnInit {
     console.log(this.user)
     this.email = '';
     this.password = '';
+  }
+
+  handleLogin(){
+    //cut the withCredentials from this function to avoid error
+    this.authService.login(this.auth)
+    .subscribe(user=>{
+      this.user = user
+      localStorage.setItem('user', JSON.stringify(user));
+      this.router.navigate(['dashboard']);
+      //how to pass user here
+    })
   }
 
 }

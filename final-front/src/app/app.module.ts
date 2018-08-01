@@ -11,12 +11,18 @@ import { SignupComponent } from './signup/signup.component';
 import {AuthService} from './services/auth.service';
 
 //routes
-import {routes} from './routes'
+import {routes} from './routes';
+import { ListsComponent } from './lists/lists.component';
+import { ListDetailComponent } from './list-detail/list-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent
+    SignupComponent,
+    ListsComponent,
+    ListDetailComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

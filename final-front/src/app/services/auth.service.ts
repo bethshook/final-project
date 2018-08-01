@@ -7,6 +7,7 @@ import {Observable} from 'rxjs'
   providedIn: 'root'
 })
 export class AuthService {
+
   url = "http://localhost:3000/"
   constructor(private http: Http){}
 
@@ -15,8 +16,17 @@ export class AuthService {
     .pipe(map((res: Response)=>res.json()))
   }
 
+  login(auth): Observable<any>{
+    return this.http.post(this.url + 'login', auth)
+    .pipe(map(res=>console.log(res)))
+  }
+
   logout(){
     localStorage.removeItem('user')
   }
 
+
+
 }
+
+//ngoninit if localstorage.user .navigate router
