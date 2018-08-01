@@ -8,18 +8,11 @@ import {Observable} from 'rxjs'
 })
 export class AuthService {
   url = "http://localhost:3000/"
-  constructor(
-    private http: Http
-  ) { }
+  constructor(private http: Http){}
 
   signup(auth): Observable<string>{
     return this.http.post(this.url + 'signup', auth)
-    .pipe(map((res:Response)=>res.json()))
-  }
-
-  login(auth): Observable<string>{
-    return this.http.post(this.url + 'login', auth, {withCredentials:true})
-    .pipe(map((res:Response)=>res.json()))
+    .pipe(map((res: Response)=>res.json()))
   }
 
   logout(){

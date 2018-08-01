@@ -1,0 +1,16 @@
+<div>
+<h3>Sign-up</h3>
+
+<label for="email">Email</label>
+<br>
+<input type="email" name="email" placeholder="your email" [(ngModel)]="email">
+<br>
+<label for="password">Password</label>
+<br>
+<input type="password" name="password" placeholder="your password" [(ngModel)]="password">
+<br>
+<!-- <input type="password" name="password2" placeholder="your password">
+<br> -->
+<input type="submit" value="Sign up" (click)='handleSignup()'>
+
+</div>

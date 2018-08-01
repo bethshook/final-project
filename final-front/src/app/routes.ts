@@ -1,16 +1,9 @@
 import {Routes} from '@angular/router'
 import { AppComponent } from './app.component';
-import { SignupFormComponent } from './signup-form/signup-form.component';
-import {LoginComponent} from './login/login.component';
-import {PrivateComponent} from './private/private.component';
+import { SignupComponent } from './signup/signup.component';
 
 export const routes: Routes = [
-    { path: 'private', component: PrivateComponent},
-    { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignupComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home',  component: AppComponent },
-    {
-      path: 'signup',
-      component: SignupFormComponent
-    }
 ]
