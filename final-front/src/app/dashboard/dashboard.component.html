@@ -1,9 +1,19 @@
 <h3>User Dashboard</h3>
 
 <div id="user-info">
-<p>Email: {{user.email}}</p>
+<p>Email: </p>
 </div>
 <div id="expertise">
-
+Add a city: <input placeholder="city name" [(ngModel)]="city" type="text"><button (click)="handleCity()">Add</button>
 </div>
+<app-city-survey *ngIf="loadSurvey"></app-city-survey>
+
+
+<div class="lists">
+My lists
+</div>
+
+<div class="lists">
+Saved Lists
+    </div>
 

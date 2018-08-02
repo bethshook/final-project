@@ -5,6 +5,9 @@ const placeSchema = new Schema({
     name: String,
     type: String,
     address: String,
+    lat: String,
+    long: String,
+    img: String,
     // will there be maps?
     // not sure it's necessary to have lists here
     lists: [{

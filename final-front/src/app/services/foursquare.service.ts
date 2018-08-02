@@ -3,15 +3,13 @@ import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class FoursquareService {
 
-  places: Array<object> = []
-
   url = "https://api.foursquare.com/v2/venues/search?"
+  photoUrl = "https://api.foursquare.com/v2/venues/"
 
   constructor(private http:Http) { }
 
@@ -20,15 +18,26 @@ export class FoursquareService {
     return this.http.get(this.url +'near=' + city + '&query=' + input + '&client_id=ICBF3ADA41FDWYCLTDTHH0Q31KJ3UZWS0ZMHNDVXSZF4LYBQ&client_secret=FNIYZJGMA0OPC2JR0SQM4CIFP0JS2FNZ5RHZ1ZYLY1OHDF4X&v=20180730').toPromise()
       .then((res: Response)=>res.json())
       .then(places=>{
-        // console.log(places.response.venues)
-        this.places = places.response.venues
+        return places.response.venues
       })
   }
 
-  getObservablePlaces(): Observable<string>{
-    return this.http.get(this.url)
-    .pipe(map((res:Response)=>res.json()))
+  getPhotos(id){
+    return this.http.get(this.photoUrl + id + '/photos?&client_id=ICBF3ADA41FDWYCLTDTHH0Q31KJ3UZWS0ZMHNDVXSZF4LYBQ&client_secret=FNIYZJGMA0OPC2JR0SQM4CIFP0JS2FNZ5RHZ1ZYLY1OHDF4X&v=20180730').toPromise()
+    .then((res: Response)=>res.json())
+    .then(photos=>{
+      let prefix = photos.response.photos.items[1].prefix;
+      let size = 'height100';
+      let suffix = photos.response.photos.items[1].suffix;
+      return prefix + size + suffix;
+    })
   }
+
+
+  // getObservablePlaces(): Observable<string>{
+  //   return this.http.get(this.url)
+  //   .pipe(map((res:Response)=>res.json()))
+  // }
 
 
 

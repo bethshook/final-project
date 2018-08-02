@@ -9,12 +9,14 @@ import { SignupComponent } from './signup/signup.component';
 
 //services
 import {AuthService} from './services/auth.service';
+import {CityService} from './services/city.service'
 
 //routes
 import {routes} from './routes';
 import { ListsComponent } from './lists/lists.component';
 import { ListDetailComponent } from './list-detail/list-detail.component';
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CitySurveyComponent } from './city-survey/city-survey.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     SignupComponent,
     ListsComponent,
     ListDetailComponent,
-    DashboardComponent
+    DashboardComponent,
+    CitySurveyComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     FormsModule,
     HttpModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, CityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
