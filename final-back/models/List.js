@@ -6,6 +6,9 @@ const listSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
+    listName: String,
+    city: String,
+    cityLevel: Number,
     places: [{
         type: Schema.Types.ObjectId,
         ref: 'Place'

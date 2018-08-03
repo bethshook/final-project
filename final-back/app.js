@@ -26,7 +26,10 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
-app.use(cors())
+app.use(cors({
+  origin: true,
+  credentials: true
+}))
 
 app.use(session({
   store: new MongoStore({
@@ -67,6 +70,7 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 
 const auth = require('./routes/auth')
+
 app.use('/', auth)
 
 module.exports = app;
