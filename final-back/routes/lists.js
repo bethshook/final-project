@@ -17,7 +17,7 @@ router.post('/list-detail', (req,res,next) => {
   });
 
   // post new list
-  router.post('/city-survey', (req,res,next) => {
+  router.post('/dashboard', (req,res,next) => {
     console.log(req.body)
     List.create(req.body)
     .then(list => res.json(list))
@@ -44,6 +44,18 @@ router.post('/list-detail', (req,res,next) => {
     })
     .catch(err => {
       return res.status(500).json(err);
+    })
+  })
+
+  //delete place
+  router.delete('/list-detail/:id', (req,res,next) => {
+    Place.findByIdAndRemove(req.params.id)
+    .then(place => {
+      res.status(200).json(phone)
+    })
+    .catch(e=>{
+      res.status(500).json({message:"Something went wrong."})
+      next(e)
     })
   })
 

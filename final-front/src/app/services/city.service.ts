@@ -25,7 +25,7 @@ export class CityService {
 
   //create list
   createList(list): Observable<string>{
-    return this.http.post(this.url + 'city-survey', list)
+    return this.http.post(this.url + 'dashboard', list)
     .pipe(map((res: Response)=>res.json()))
   }
 
@@ -42,13 +42,11 @@ export class CityService {
     .pipe(map((res: Response)=>res.json()))
   }
 
-  //
-  saveCity(city){
-    this.currentCity = city;
-  }
-
-  retrieveCity(){
-    return this.currentCity
-  }
+  //delete place
+  //need to be sure I'm deleting PLACEID and not LISTID
+  // deletePlace(placeId, listId){
+  //   return this.http.delete(this.url + 'list-detail/' + listId, placeId)
+  //   .pipe(map((res: Response)=>res.json()))
+  // }
 
 }

@@ -15,5 +15,7 @@
   </div>
 
   <ul>
-  <ul id="myList" *ngFor="let place of list.places"><li>{{place.name}} - <span (click)="handleNewPlace(result)">add to list</span></li></ul></ul>
+  <ul id="myList" *ngFor="let place of list.places"><li>{{place.name}} - <span (click)="removePlace(place._id)">delete</span></li></ul></ul>
+
+  <p><a [routerLink]="['/dashboard']">Back to dashaboard</a></p>
 

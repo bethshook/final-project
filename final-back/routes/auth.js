@@ -2,6 +2,34 @@ const router    = require('express').Router();
 const passport  = require('passport');
 const User      = require('../models/User');
 
+//multer config
+// const multer = require('multer');
+// const upload = multer({dest: './public/assets'});
+
+function isAuthenticated(req,res,next){
+    if(req.isAuthenticated()){
+        console.log(req.user)
+        return next()
+    }else{
+        res.json({message:"You don't have permission"});
+    }
+}
+
+function isLoggedIn(req,res,next){
+    if(req.isAuthenticated()){
+        res.redirect('/dashboard')
+    }else{
+        next();
+    }
+}
+
+router.get('/dashboard', isAuthenticated, (req,res)=>{
+    User.findById(req.user._id)
+    .populate('lists')
+    .then(lists=>res.json(lists))
+    .catch(e=>next(e))
+});
+
 router.post('/signup', (req,res,next) => {
     User.register(req.body, req.body.password)
     .then(user => res.json(user))

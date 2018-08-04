@@ -15,7 +15,7 @@ export class FoursquareService {
 
   //function(s) to search for locations go here
   getPlaces(city,input){
-    return this.http.get(this.url +'near=' + city + '&query=' + input + '&client_id=ICBF3ADA41FDWYCLTDTHH0Q31KJ3UZWS0ZMHNDVXSZF4LYBQ&client_secret=FNIYZJGMA0OPC2JR0SQM4CIFP0JS2FNZ5RHZ1ZYLY1OHDF4X&v=20180730').toPromise()
+    return this.http.get(this.url +'near=' + city + '&query=' + input + '&limit=5&client_id=ICBF3ADA41FDWYCLTDTHH0Q31KJ3UZWS0ZMHNDVXSZF4LYBQ&client_secret=FNIYZJGMA0OPC2JR0SQM4CIFP0JS2FNZ5RHZ1ZYLY1OHDF4X&v=20180730').toPromise()
       .then((res: Response)=>res.json())
       .then(places=>{
         return places.response.venues

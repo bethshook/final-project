@@ -1,11 +1,13 @@
-<!-- <app-city-survey *ngIf="loadSurvey" [city]="newCity"></app-city-survey> -->
+<div *ngIf="!user">
+Whoops! Looks like you need to <a [routerLink]="['/signup']">log in</a>.
 
-<!-- <div *ngIf="!loadSurvey"> -->
-<div>
+</div>
+
+<div *ngIf="user">
 <h3>User Dashboard</h3>
 
 <div id="user-info">
-<p>Email: {{user.email}}</p>
+<p>Email: {{user.username}}</p>
 </div>
 <div id="expertise">
 Add a city: <input placeholder="city name" [(ngModel)]="newCity" type="text"><button (click)="handleCity()">Add</button>
@@ -15,13 +17,15 @@ Add a city: <input placeholder="city name" [(ngModel)]="newCity" type="text"><bu
 <div class="lists">
 <h4>My Lists</h4>
 <ul *ngFor="let list of user.lists">
-    test
-    <li>{{list.listName}}</li>
+    <a [routerLink]="['/list-detail', list._id]">
+    <li>{{list.listName}}</li></a>
 </ul>
 </div>
 
 <div class="lists">
 Saved Lists
     </div>
-</div>
 
+
+<p><button (click)="handleLogout()">Log out</button></p>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { CityService } from '../services/city.service';
@@ -14,7 +15,9 @@ export class CitySurveyComponent implements OnInit {
   constructor(
     private cityService: CityService,
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) { }
 
   cityExp: any = {
     five: false,
@@ -25,17 +28,9 @@ export class CitySurveyComponent implements OnInit {
   }
   cityLevel: any
   expId: any
-
-  listObj: any = {
-    user: '',
-    listName: '',
-    city: '',
-    cityLevel: '',
-    places: []
-  }
-
-  listName: string = ''
-  listId: string = ''
+  id: string = ''
+  list: any
+  currentCity: string = ''
 
   addExp(e){
     if(e.target.checked){
@@ -46,10 +41,20 @@ export class CitySurveyComponent implements OnInit {
 
   user: any
   @Input() dashboard: DashboardComponent;
-  // @Input('city') newCity: string;
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
+    this.activeRoute.params
+    .subscribe(params=>{
+      console.log(params.id)
+      this.id = params.id
+      this.cityService.getOneList(this.id)
+      .subscribe(list=>{
+       console.log(list)
+        this.list = list
+        this.currentCity = this.list.city
+      })
+    })
   }
 
   handleSurvey(){
@@ -71,30 +76,21 @@ export class CitySurveyComponent implements OnInit {
           default:
               this.cityLevel = 1;
       }
-      this.listObj.listName = this.user.email + '\'s ' + this.newCity + ' Recommendations';
-      this.listName = this.listObj.listName;
-      this.listObj.user = this.user;
-      this.listObj.city = this.newCity;
-      this.listObj.cityLevel = this.cityLevel;
-      this.cityService.createList(this.listObj)
-        .subscribe(r=>{
-          let id = r._id;
-          this.listId = id;
-          this.user.lists.push(this.listId);
-          this.updateUser(this.user)
-          this.router.navigate(['list-detail', r._id]);
-        })
+          this.list.cityLevel = this.cityLevel;
+          console.log(this.list)
+          this.updateList(this.list)
+          this.router.navigate(['list-detail', this.list._id]);
       }
+      return;
     }
     }
 
-    updateUser(user){
-      this.authService.updateUser(user)
+    updateList(list){
+      // if(!window.confirm('Estas seguro?')) return
+      this.cityService.updateOneList(list)
       .subscribe(()=>{
-       console.log('user updated on component')
+       console.log('list updated on component')
       })
     }
-
-
 
 }
