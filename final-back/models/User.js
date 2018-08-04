@@ -4,7 +4,11 @@ const passportlm    = require('passport-local-mongoose');
 
 const userSchema = new Schema({
     username: String,
-    email: String
+    email: String,
+    lists: [{
+        type: Schema.Types.ObjectId,
+        ref: 'List'
+    }]
 },{
     timestamp: {
         createdAt: 'created_at',

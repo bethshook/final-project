@@ -11,7 +11,13 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home',  component: SignupComponent },
     { path: 'lists',  component: ListsComponent },
-    { path: 'list-detail',  component: ListDetailComponent },
+    { path: 'list-detail/:id',
+    component: ListDetailComponent,
+        children:[
+            // {
+            //     path:'edit',
+            //     component:EditListComponent
+        ]},
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'city-survey', component:CitySurveyComponent }
+    { path: 'city-survey/:id', component:CitySurveyComponent }
 ]

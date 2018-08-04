@@ -17,15 +17,18 @@ export class AuthService {
   }
 
   login(auth): Observable<any>{
-    return this.http.post(this.url + 'login', auth)
-    .pipe(map(res=>console.log(res)))
+    return this.http.post(this.url + 'login', auth, {withCredentials:true})
+    .pipe(map(res=>res.json()))
   }
 
   logout(){
     localStorage.removeItem('user')
   }
 
-
+  updateUser(user) {
+    return this.http.put(this.url + 'city-survey/' + user._id, user)
+    .pipe(map((res: Response)=>res.json()))
+  }
 
 }
 

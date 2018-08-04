@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { CitySurveyComponent } from '../city-survey/city-survey.component'
+import { SignupComponent } from '../signup/signup.component';
+import { CityService } from '../services/city.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -9,19 +10,25 @@ import { CitySurveyComponent } from '../city-survey/city-survey.component'
 })
 export class DashboardComponent implements OnInit {
 
+  @Input() signup: SignupComponent;
+
   newCity: String = ''
-  city: String = ''
+  thisCity: String = 'test'
   loadSurvey: Boolean = false
+  user: any
 
   constructor(
-    private router: Router) { }
+    private router: Router,
+    private cityService: CityService) { }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user'))
+    console.log(this.user)
   }
 
 handleCity(){
-    this.city = this.city
-    console.log(this.city)
-    this.loadSurvey = true
+    console.log(this.newCity, 'button clicked in dashboard component');
+    // this.loadSurvey = true; from back when this was child comp
+    this.router.navigate(['city-survey/', this.user._id, this.newCity]);
   }
 }

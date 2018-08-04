@@ -13,25 +13,32 @@ export class SignupComponent implements OnInit {
   hasAccount: boolean = true
   email: string = ''
   password: string = ''
+  username: string = ''
   auth: any = {
+    username: '',
     email: '',
-    password: ''
+    password: '',
+    lists: []
   } //object used for all authentication
-  user = ''
+  user: any
 
   constructor(
     private authService: AuthService,
     private router: Router) { }
 
   ngOnInit() {
+      //saco al user del localstorage
+      //  const user = JSON.parse(localStorage.getItem('user'))
   }
 
   handleSignup(){
+    this.auth.username = this.username;
     this.auth.email = this.email;
     this.auth.password = this.password;
     this.authService.signup(this.auth)
     .subscribe( user => this.user = user)
     console.log(this.user)
+    this.username = '';
     this.email = '';
     this.password = '';
   }
@@ -40,7 +47,8 @@ export class SignupComponent implements OnInit {
     //cut the withCredentials from this function to avoid error
     this.authService.login(this.auth)
     .subscribe(user=>{
-      this.user = user
+      console.log(user);
+      this.user = user;
       localStorage.setItem('user', JSON.stringify(user));
       this.router.navigate(['dashboard']);
       //how to pass user here

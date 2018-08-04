@@ -1,19 +1,27 @@
+<!-- <app-city-survey *ngIf="loadSurvey" [city]="newCity"></app-city-survey> -->
+
+<!-- <div *ngIf="!loadSurvey"> -->
+<div>
 <h3>User Dashboard</h3>
 
 <div id="user-info">
-<p>Email: </p>
+<p>Email: {{user.email}}</p>
 </div>
 <div id="expertise">
-Add a city: <input placeholder="city name" [(ngModel)]="city" type="text"><button (click)="handleCity()">Add</button>
+Add a city: <input placeholder="city name" [(ngModel)]="newCity" type="text"><button (click)="handleCity()">Add</button>
 </div>
-<app-city-survey *ngIf="loadSurvey"></app-city-survey>
 
 
 <div class="lists">
-My lists
+<h4>My Lists</h4>
+<ul *ngFor="let list of user.lists">
+    test
+    <li>{{list.listName}}</li>
+</ul>
 </div>
 
 <div class="lists">
 Saved Lists
     </div>
+</div>
 
