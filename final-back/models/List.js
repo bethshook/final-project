@@ -8,7 +8,10 @@ const listSchema = new Schema({
     },
     listName: String,
     city: String,
-    cityLevel: Number,
+    cityLevel: {
+        type: Number,
+        default: 1
+    },
     places: [{
         type: Schema.Types.ObjectId,
         ref: 'Place'

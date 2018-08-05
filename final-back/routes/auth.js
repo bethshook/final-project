@@ -15,15 +15,17 @@ function isAuthenticated(req,res,next){
     }
 }
 
-// function isLoggedIn(req,res,next){
-//     if(req.isAuthenticated()){
-//         res.redirect('/dashboard')
-//     }else{
-//         next();
-//     }
-// }
+router.get('/loggedUser', isAuthenticated, (req,res)=>{
+    User.findById(req.user._id)
+    .populate('lists')
+    .then(user=>{
+        console.log(user)
+        return res.json(user)
+    })
+    .catch(e=>console.log(e))
+});
 
-router.get('/dashboard', isAuthenticated, (req,res)=>{
+router.get('/dashboard/:id', isAuthenticated, (req,res,next)=>{
     User.findById(req.user._id)
     .populate('lists')
     .then(lists=>res.json(lists))

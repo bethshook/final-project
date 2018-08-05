@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   loadSurvey: Boolean = false
   user: any
   listId: string = ''
+  userId: string = ''
 
   listObj: any = {
     user: '',
@@ -35,9 +36,13 @@ export class DashboardComponent implements OnInit {
     private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'))
-    console.log(this.user.lists)
-  }
+    this.authService.getLoggedUser()
+    .subscribe(user=>{
+      console.log(user)
+      this.user = user
+      })
+
+    }
 
 handleCity(){
     this.listObj.listName = this.user.username + '\'s ' + this.newCity + ' Recommendations';
@@ -48,14 +53,13 @@ handleCity(){
         let id = l._id;
         this.listId = id;
         this.user.lists.push(this.listId);
-        this.updateUser(this.user)
+        this.updateUser(this.user);
   })
 }
 
   updateUser(user){
     this.authService.updateUser(this.user)
-    .subscribe(user=>{
-      this.user = user
+    .subscribe(()=>{
       this.router.navigate(['city-survey', this.listId]);
     })
   }

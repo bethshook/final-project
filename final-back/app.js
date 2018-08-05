@@ -25,7 +25,7 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
-app.use(cors({
+app.use(require('cors')({
   origin: true,
   credentials: true
 }))
@@ -58,6 +58,7 @@ app.use(require('node-sass-middleware')({
 //passport initilize
 const passport = require('./helpers/passport')
 app.use(passport.initialize())
+app.use(passport.session())
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

@@ -92,7 +92,6 @@ export class ListDetailComponent implements OnInit {
       // this.cityService.deletePlace(id, this.id)
     }
 
-
     updateList(list){
       // if(!window.confirm('Estas seguro?')) return
       this.cityService.updateOneList(list)

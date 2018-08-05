@@ -16,9 +16,17 @@ export class AuthService {
     .pipe(map((res: Response)=>res.json()))
   }
 
-  login(auth): Observable<any>{
+  login(auth): Observable<string>{
     return this.http.post(this.url + 'login', auth, {withCredentials:true})
     .pipe(map(res=>res.json()))
+  }
+
+  //from Pablo
+  getLoggedUser(){
+    return this.http.get(this.url + 'loggedUser', {withCredentials:true})
+    .pipe(map(res=>{
+      return res.json()
+    }))
   }
 
   logout(){
@@ -29,7 +37,6 @@ export class AuthService {
     return this.http.put(this.url + 'dashboard/' + user._id, user)
     .pipe(map((res: Response)=>res.json()))
   }
-
 
   // getUser(user){
   //   return this.http.get(this.url + 'dashboard/' + user._id, user)
