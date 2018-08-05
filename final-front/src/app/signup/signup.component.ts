@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import { Router } from '@angular/router';
+import {FirebaseService} from '../services/firebase.service'
 
 @Component({
   selector: 'app-signup',
@@ -24,11 +25,15 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private firebaseService: FirebaseService) { }
 
   ngOnInit() {
-      //saco al user del localstorage
-      //  const user = JSON.parse(localStorage.getItem('user'))
+    // const user = JSON.parse(localStorage.getItem('user'))
+  }
+
+  loginWithFacebook(){
+    this.firebaseService.loginWithFacebook()
   }
 
   handleSignup(){
@@ -47,11 +52,9 @@ export class SignupComponent implements OnInit {
     //cut the withCredentials from this function to avoid error
     this.authService.login(this.auth)
     .subscribe(user=>{
-      console.log(user);
       this.user = user;
       localStorage.setItem('user', JSON.stringify(user));
       this.router.navigate(['dashboard']);
-      //how to pass user here
     })
   }
 

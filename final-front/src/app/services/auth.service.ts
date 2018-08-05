@@ -30,6 +30,11 @@ export class AuthService {
     .pipe(map((res: Response)=>res.json()))
   }
 
+  // getUser(user){
+  //   return this.http.get(this.url + 'dashboard/' + user._id, user)
+  //   .pipe(map((res: Response)=>res.json()))
+  // }
+
 }
 
 //ngoninit if localstorage.user .navigate router

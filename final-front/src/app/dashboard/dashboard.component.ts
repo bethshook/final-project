@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SignupComponent } from '../signup/signup.component';
 import { CityService } from '../services/city.service';
 import { AuthService } from '../services/auth.service'
@@ -30,10 +31,12 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private cityService: CityService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'))
+    console.log(this.user)
   }
 
 handleCity(){

@@ -13,7 +13,6 @@ import {CityService} from './services/city.service'
 
 //routes
 import {routes} from './routes';
-import { ListsComponent } from './lists/lists.component';
 import { ListDetailComponent } from './list-detail/list-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CitySurveyComponent } from './city-survey/city-survey.component'
@@ -22,7 +21,6 @@ import { CitySurveyComponent } from './city-survey/city-survey.component'
   declarations: [
     AppComponent,
     SignupComponent,
-    ListsComponent,
     ListDetailComponent,
     DashboardComponent,
     CitySurveyComponent

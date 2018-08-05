@@ -15,13 +15,13 @@ function isAuthenticated(req,res,next){
     }
 }
 
-function isLoggedIn(req,res,next){
-    if(req.isAuthenticated()){
-        res.redirect('/dashboard')
-    }else{
-        next();
-    }
-}
+// function isLoggedIn(req,res,next){
+//     if(req.isAuthenticated()){
+//         res.redirect('/dashboard')
+//     }else{
+//         next();
+//     }
+// }
 
 router.get('/dashboard', isAuthenticated, (req,res)=>{
     User.findById(req.user._id)
@@ -29,6 +29,11 @@ router.get('/dashboard', isAuthenticated, (req,res)=>{
     .then(lists=>res.json(lists))
     .catch(e=>next(e))
 });
+
+// facebook login
+router.post('/facebook/login', passport.authenticate('facebook-token'), (req,res)=>{
+    res.json(req.user)
+})
 
 router.post('/signup', (req,res,next) => {
     User.register(req.body, req.body.password)

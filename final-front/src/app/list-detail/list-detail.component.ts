@@ -89,7 +89,7 @@ export class ListDetailComponent implements OnInit {
     }
 
     removePlace(id){
-      this.cityService.deletePlace(id, this.id)
+      // this.cityService.deletePlace(id, this.id)
     }
 
 

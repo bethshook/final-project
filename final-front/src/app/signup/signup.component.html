@@ -7,6 +7,7 @@
         <br>
         <input placeholder="tu password" [(ngModel)]="auth.password"  type="password">
         <button (click)="handleLogin()" >Entrar</button>
+        <p>Entra con Facebook <button (click)="loginWithFacebook()">Facebook log-in</button></p>
         <p>No tienes cuenta? <span (click)="hasAccount=!hasAccount" >Click aquí</span></p>
     </div>
 
