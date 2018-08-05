@@ -1,40 +1,51 @@
+<div class="wrapper">
+  <h1 class="app-title">Vocal Local</h1>
+  <div class="tagline">Share your favorite places in the cities you love.<br>Plan your next trip with friends' recommendations.</div>
 
-<div>
-
-    <div *ngIf="hasAccount">
-        <h2>Log in</h2>
-        <input placeholder="email" [(ngModel)]="auth.email" type="text">
+    <div *ngIf="hasAccount" class="signup-box">
+        <h4>Log in to your account</h4>
+    <div class="auth-container">
+      <div class="inputs"><input placeholder="Your email" [(ngModel)]="auth.email" type="text">
         <br>
-        <input placeholder="tu password" [(ngModel)]="auth.password"  type="password">
-        <button (click)="handleLogin()" >Entrar</button>
-        <p>Entra con Facebook <button (click)="loginWithFacebook()">Facebook log-in</button></p>
-        <p>No tienes cuenta? <span (click)="hasAccount=!hasAccount" >Click aquí</span></p>
+        <input placeholder="Your password" [(ngModel)]="auth.password"  type="password">
+      </div>
+        <button class="auth-button" (click)="handleLogin()" >Sign In</button>
+
+      </div>
+      <button class="fb" (click)="loginWithFacebook()"><i class="fab fa-facebook-square"></i>Continue with Facebook</button>
+        <p>Don't have an account? <span class="fake-link" (click)="hasAccount=!hasAccount" >Click here.</span></p>
     </div>
 
 
-    <div *ngIf="!hasAccount">
-    <h3>Sign-up</h3>
+    <div *ngIf="!hasAccount" class="signup-box">
+        <h4>Sign up for an account</h4>
 
+          <div class="auth-group">
+            <div>
     <label for="username">Username</label>
-    <br>
-    <input type="text" name="username" placeholder="your username" [(ngModel)]="username">
-    <br>
+  </div>
+  <div>
+    <input type="text" name="username" [(ngModel)]="username">
+  </div>
+  </div>
+  <div class="auth-group">
     <label for="email">Email</label>
-    <br>
-    <input type="email" name="email" placeholder="your email" [(ngModel)]="email">
-    <br>
+    <input type="email" name="email" [(ngModel)]="email">
+  </div>
+  <div class="auth-group">
     <label for="password">Password</label>
-    <br>
-    <input type="password" name="password" placeholder="your password" [(ngModel)]="password" #myPassword="ngModel" required>
+    <input type="password" name="password" [(ngModel)]="password" #myPassword="ngModel" required>
 
     <div *ngIf="myPassword.errors && (myPassword.dirty || myPassword.touched)">
     <p class="error" [hidden]="!myPassword.errors.required">
       Password is required
     </p>
   </div>
+  </div>
+
     <br>
-    <input type="submit" value="Sign up" (click)='handleSignup()'>
-    <p>Ya tienes cuenta? <span (click)="hasAccount=!hasAccount" >Click aquí</span></p>
+    <button class="auth-button" (click)='handleSignup()'>Sign Up</button>
+    <p>Have an account? <span class="fake-link" (click)="hasAccount=!hasAccount" >Click here.</span></p>
 
     </div>
 

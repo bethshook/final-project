@@ -26,7 +26,7 @@ export class CitySurveyComponent implements OnInit {
     two: false,
     one: false
   }
-  cityLevel: any
+  cityLevel: Number
   expId: any
   id: string = ''
   list: any
@@ -50,7 +50,6 @@ export class CitySurveyComponent implements OnInit {
       this.id = params.id
       this.cityService.getOneList(this.id)
       .subscribe(list=>{
-       console.log(list)
         this.list = list
         this.currentCity = this.list.city
       })
@@ -77,17 +76,16 @@ export class CitySurveyComponent implements OnInit {
               this.cityLevel = 1;
       }
           this.list.cityLevel = this.cityLevel;
-          console.log(this.list)
-          this.updateList(this.list)
+          console.log('after ranking', this.list);
+          this.updateList(this.list);
           this.router.navigate(['list-detail', this.list._id]);
       }
-      return;
     }
     }
 
     updateList(list){
       // if(!window.confirm('Estas seguro?')) return
-      this.cityService.updateOneList(list)
+      this.cityService.updateListFromSurvey(list)
       .subscribe(()=>{
        console.log('list updated on component')
       })

@@ -1,4 +1,3 @@
-<!-- <div *ngIf="!submitted"> -->
     <div>
         <h2>How well do you know {{currentCity}}?</h2>
         <p>Check all that apply:</p>
@@ -10,4 +9,4 @@
 
         <button (click)="handleSurvey()" >Submit</button>
 </div>
-<!-- <app-list-detail *ngIf="submitted" [city]="newCity" [listId]="listId" [listObj]="listObj"></app-list-detail> -->
+<p><a [routerLink]="['/dashboard', user._id]">Back to dashboard</a></p>

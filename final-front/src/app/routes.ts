@@ -9,13 +9,7 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home',  component: SignupComponent },
-    { path: 'list-detail/:id',
-    component: ListDetailComponent,
-        children:[
-            // {
-            //     path:'edit',
-            //     component:EditListComponent
-        ]},
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'list-detail/:id', component: ListDetailComponent},
+    { path: 'dashboard/:id', component: DashboardComponent },
     { path: 'city-survey/:id', component:CitySurveyComponent }
 ]

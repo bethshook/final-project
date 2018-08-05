@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SignupComponent } from '../signup/signup.component';
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'))
-    console.log(this.user)
+    console.log(this.user.lists)
   }
 
 handleCity(){
@@ -49,14 +49,14 @@ handleCity(){
         this.listId = id;
         this.user.lists.push(this.listId);
         this.updateUser(this.user)
-        this.router.navigate(['city-survey', l._id]);
   })
 }
 
   updateUser(user){
-    this.authService.updateUser(user)
-    .subscribe(()=>{
-     console.log('user updated on component')
+    this.authService.updateUser(this.user)
+    .subscribe(user=>{
+      this.user = user
+      this.router.navigate(['city-survey', this.listId]);
     })
   }
 

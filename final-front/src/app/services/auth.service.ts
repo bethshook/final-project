@@ -26,9 +26,10 @@ export class AuthService {
   }
 
   updateUser(user) {
-    return this.http.put(this.url + 'city-survey/' + user._id, user)
+    return this.http.put(this.url + 'dashboard/' + user._id, user)
     .pipe(map((res: Response)=>res.json()))
   }
+
 
   // getUser(user){
   //   return this.http.get(this.url + 'dashboard/' + user._id, user)
@@ -36,5 +37,3 @@ export class AuthService {
   // }
 
 }
-
-//ngoninit if localstorage.user .navigate router

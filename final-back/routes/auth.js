@@ -48,15 +48,14 @@ router.post('/login', passport.authenticate('local'), (req,res,next) => {
     .catch(e => res.json(e))
 })
 
-  // update existing user
-  router.put('/city-survey/:id', (req,res,next) => {
-    console.log('editing user on backend')
-    User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+//   update existing user
+  router.put('/dashboard/:id', (req,res,next) => {
+    User.findByIdAndUpdate(req.params.id, req.body, {new:true})
         .then(user => {
-            return res.status(202).json(list)
+            return res.status(202).json(user)
         }).catch(err => {
             return res.status(404).json(err);
-        });
+        })
   })
 
 

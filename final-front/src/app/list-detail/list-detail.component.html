@@ -1,5 +1,5 @@
 <h3>Name: {{list.listName}}</h3>
-<p>user's ranking for {{list.city}}: {{list.cityLevel}}</p>
+<p>{{list.user.username}}'s expertise for <b>{{list.city}}:</b> {{list.cityLevel}} <i class="fas fa-star"></i></p>
 
 <div id="foursquare-search">
 <p>Search for a place to add to your list:</p>
@@ -17,5 +17,5 @@
   <ul>
   <ul id="myList" *ngFor="let place of list.places"><li>{{place.name}} - <span (click)="removePlace(place._id)">delete</span></li></ul></ul>
 
-  <p><a [routerLink]="['/dashboard']">Back to dashaboard</a></p>
+  <p><a [routerLink]="['/dashboard', list.user._id]">Back to dashboard</a></p>
 

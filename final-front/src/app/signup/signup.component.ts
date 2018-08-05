@@ -29,6 +29,7 @@ export class SignupComponent implements OnInit {
     private firebaseService: FirebaseService) { }
 
   ngOnInit() {
+    //if user is from local storage navigate
     // const user = JSON.parse(localStorage.getItem('user'))
   }
 
@@ -54,7 +55,7 @@ export class SignupComponent implements OnInit {
     .subscribe(user=>{
       this.user = user;
       localStorage.setItem('user', JSON.stringify(user));
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['dashboard', this.user._id]);
     })
   }
 

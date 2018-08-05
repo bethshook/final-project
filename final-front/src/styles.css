@@ -1,13 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Satisfy');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+
 body{
     background-color: #cbdae7;
-}
-
-#main-container{
-    width: 50%;
-    margin: 0 auto;
+    font-family: Avenir, sans-serif;
 }
 
 button {
     margin: 20px 0;
+    cursor: pointer;
+    background: #DD4124;
+    color: white;
+    padding: 8px 26px;
+    border: none;
+}
+
+input {
+    margin: 5px 0;
+    padding: 3px;
 }

@@ -31,7 +31,7 @@ export class CityService {
 
   //get list
     getOneList(id){
-      console.log('service has id', id)
+      // console.log('service has id', id) this works
       return this.http.get(this.url + 'list-detail/' + id)
           .pipe(map((res: Response)=>res.json()));
   }
@@ -41,6 +41,14 @@ export class CityService {
     return this.http.put(this.url + 'list-detail/' + list._id, list)
     .pipe(map((res: Response)=>res.json()))
   }
+
+  //edit list from survey
+  updateListFromSurvey(list){
+    console.log('service', list)
+    return this.http.put(this.url + 'city-survey/' + list._id, list)
+    .pipe(map((res: Response)=>res.json()))
+  }
+
 
   //delete place
   //need to be sure I'm deleting PLACEID and not LISTID

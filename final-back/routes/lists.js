@@ -3,6 +3,7 @@ const router  = express.Router();
 const path = require('path');
 const Place     = require('../models/Place');
 const List      = require('../models/List')
+const User      = require('../models/User')
 
 //archivos
 // const multer = require('multer')
@@ -18,9 +19,21 @@ router.post('/list-detail', (req,res,next) => {
 
   // post new list
   router.post('/dashboard', (req,res,next) => {
-    console.log(req.body)
     List.create(req.body)
-    .then(list => res.json(list))
+    .then(list => {
+      res.json(list)
+    })
+    .catch(e=>res.json(e))
+  })
+
+  // edit existing list after survey
+  router.put('/city-survey/:id', (req,res,next) => {
+    List.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(list => {
+      return res. status(202).json(list)
+    }).catch(err => {
+      return res.status(404).json(err)
+    })
   })
 
   // edit existing list
@@ -38,7 +51,9 @@ router.post('/list-detail', (req,res,next) => {
   router.get('/list-detail/:id', (req,res) => {
     List.findById(req.params.id)
     .populate('places')
+    .populate('user')
     .then(list => {
+      // console.log(list, 'this comes from back end') works
       if (!list) return res.status(404);
       return res.status(200).json(list);
     })
