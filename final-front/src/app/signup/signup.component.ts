@@ -19,7 +19,9 @@ export class SignupComponent implements OnInit {
     username: '',
     email: '',
     password: '',
-    lists: []
+    lists: [],
+    friends: [],
+    savedLists: []
   } //object used for all authentication
   user: any
 
@@ -43,10 +45,10 @@ export class SignupComponent implements OnInit {
     this.auth.password = this.password;
     this.authService.signup(this.auth)
     .subscribe( user => this.user = user)
-    console.log(this.user)
     this.username = '';
     this.email = '';
     this.password = '';
+    this.hasAccount = true;
   }
 
   handleLogin(){

@@ -10,7 +10,7 @@ Whoops! Looks like you need to <a [routerLink]="['/signup']">log in</a>.
 <div *ngIf="sameUser">
 <h3>Where will you go next?</h3>
 <p class="left">Find your friends' favorite places.</p>
-<button>Search by city</button>
+<a [routerLink]="['/list-search']"><button>Search by city</button></a>
 </div>
 </div>
 
@@ -50,13 +50,14 @@ Whoops! Looks like you need to <a [routerLink]="['/signup']">log in</a>.
 <h4>Saved Lists</h4>
 </section>
 
-    <section id="friends">
+    <section id="friends" *ngIf="sameUser">
         <h4>My Friends</h4>
         <h3>Get recommendations from the people you trust.</h3>
-        <a [routerLink]="['/users']"><button class="btn-ctr">Find friends</button></a>
+        <div class="friend-box" *ngFor="let friend of user.friends"><a [routerLink]="['/dashboard', friend._id]">{{friend.username}}</a></div>
+        <a [routerLink]="['/users', user._id]"><button class="btn-ctr">Find friends</button></a>
     </section>
 
 
-<p><button class="btn-ctr" (click)="handleLogout()">Log out</button></p>
+<p><button class="btn-ctr logout" (click)="handleLogout()">Log out</button></p>
 </div>
 

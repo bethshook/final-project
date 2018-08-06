@@ -1,4 +1,15 @@
-<div *ngFor="let user of users">
-{{user.username}}
+<div class="container">
+<h2>Add Friends</h2>
+
+<div id="flex-container">
+<div class="user" *ngFor="let user of users">
+<h3>{{user.username}}</h3>
+<br>
+<p *ngFor="let list of user.lists">{{list.city}}</p>
+<br>
+<a [routerLink]="['/dashboard', user._id]"><button>View Profile</button></a><button (click)="handleNewFriend(user)">Connect</button>
+</div>
+</div>
+<a [routerLink]="['/dashboard', user._id]"><button class="btn-ctr">Dashboard</button></a>
 
 </div>

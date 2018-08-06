@@ -9,6 +9,14 @@ const userSchema = new Schema({
     lists: [{
         type: Schema.Types.ObjectId,
         ref: 'List'
+    }],
+    savedLists: [{
+        type: Schema.Types.ObjectId,
+        ref: 'List'
+    }],
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }]
 },{
     timestamp: {

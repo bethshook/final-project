@@ -49,10 +49,22 @@ export class CityService {
     .pipe(map((res: Response)=>res.json()))
   }
 
-  //delete list
+  // save list to a user
+  saveListToUser(list){
+    return this.http.put(this.url + 'list-detail/' + list._id + '/save')
+    .pipe(map((res: Response)=>res.json()))
+  }
+
+  // delete list
   deleteList(id){
     return this.http.delete(this.url + 'list-detail/' + id)
     .pipe(map((res:Response)=>res.json()))
+  }
+
+  // search friend lists by city
+  getByCity(city){
+    return this.http.get(this.url + 'list-search', city)
+    .pipe(map((res: Response)=>res.json()))
   }
 
 

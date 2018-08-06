@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class NetworkComponent implements OnInit {
 
   users: Array<any>
+  user: any
 
   constructor(
     private authService: AuthService,
@@ -17,10 +18,23 @@ export class NetworkComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.authService.getAllUsers()
+    this.user = JSON.parse(localStorage.getItem('user'));
+      this.authService.getAllUsers(this.user)
     .then(users=>{
       this.users = users
     })
+  }
+
+  handleNewFriend(otherUser){
+    if (otherUser._id === this.user._id) {
+      alert('You can\'t connect with yourself!')
+    } else {
+      console.log(otherUser)
+      this.user.friends.push(otherUser._id);
+      this.authService.addFriend(this.user)
+      .subscribe(()=>{
+      })
+    }
   }
 
 }

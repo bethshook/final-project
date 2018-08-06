@@ -1,6 +1,6 @@
 <div class="wrapper">
   <h1 class="app-title">Vocal Local</h1>
-  <div class="tagline">Share your favorite places in the cities you love.<br>Plan your next trip with friends' recommendations.</div>
+  <div class="tagline">Share your favorite places in the cities you love.<br>Plan your next trip based on friends' recommendations.</div>
 
     <div *ngIf="hasAccount" class="signup-box">
         <h4>Log in to your account</h4>
@@ -22,25 +22,33 @@
 
           <div class="auth-group">
             <div>
-    <label for="username">Username</label>
+    <label for="username">Username:</label>
   </div>
   <div>
-    <input type="text" name="username" [(ngModel)]="username">
+    <input type="text" name="username" [(ngModel)]="username" minlength="3" required #myUsername="ngModel">
   </div>
   </div>
   <div class="auth-group">
-    <label for="email">Email</label>
-    <input type="email" name="email" [(ngModel)]="email">
+    <label for="email">Email:</label>
+    <input type="email" name="email" [(ngModel)]="email" required>
   </div>
   <div class="auth-group">
-    <label for="password">Password</label>
-    <input type="password" name="password" [(ngModel)]="password" #myPassword="ngModel" required>
-
-    <div *ngIf="myPassword.errors && (myPassword.dirty || myPassword.touched)">
-    <p class="error" [hidden]="!myPassword.errors.required">
-      Password is required
-    </p>
+    <label for="password">Password:</label>
+    <input type="password" name="password" [(ngModel)]="password" #myPassword="ngModel" minlength="3" required>
   </div>
+  <div *ngIf="myPassword.errors && (myPassword.dirty || myPassword.touched)">
+      <div class="alert alert-warning" [hidden]="!myPassword.errors.required">
+        Password is required
+      </div>
+      <div class="alert alert-warning" [hidden]="!myUsername.errors.required">
+          Username is required
+        </div>
+      <div class="alert alert-warning" *ngIf="myUsername.errors.minlength">
+          Username must be at least 3 characters long.
+        </div>
+        <div class="alert alert-warning" *ngIf="myPassword.errors.minlength">
+            Password must be at least 3 characters long.
+          </div>
   </div>
 
     <br>

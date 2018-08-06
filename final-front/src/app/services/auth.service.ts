@@ -32,16 +32,14 @@ export class AuthService {
     localStorage.removeItem('user')
   }
 
-  // newLogout(){
-  //   localStorage.removeItem('user')
-  //   return this.http.get(this.url + 'logout/')
-  //   .pipe(map(res=>{
-  //     return res.json()
-  //   }))
-  // }
-
   updateUser(user) {
     return this.http.put(this.url + 'dashboard/' + user._id, user)
+    .pipe(map((res: Response)=>res.json()))
+  }
+
+// add user to other user's friends array
+  addFriend(user) {
+    return this.http.put(this.url + 'users/' + user._id, user)
     .pipe(map((res: Response)=>res.json()))
   }
 
@@ -52,8 +50,8 @@ export class AuthService {
   }
 
   //get all users
-  getAllUsers(){
-    return this.http.get(this.url + 'users').toPromise()
+  getAllUsers(user){
+    return this.http.get(this.url + 'users/' + user._id).toPromise()
     .then((res: Response)=> res.json())
     .catch(e=>console.log(e))
 }

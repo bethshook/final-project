@@ -5,11 +5,8 @@ const Place     = require('../models/Place');
 const List      = require('../models/List')
 const User      = require('../models/User')
 
-//archivos
-// const multer = require('multer')
-// const uploads = multer({dest: './public/images'})
 
-// post new place (eventually to list)
+// post new place
 router.post('/list-detail', (req,res,next) => {
     console.log(req.body)
     Place.create(req.body)
@@ -30,7 +27,7 @@ router.post('/list-detail', (req,res,next) => {
   router.put('/city-survey/:id', (req,res,next) => {
     List.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(list => {
-      return res. status(202).json(list)
+      return res.status(202).json(list)
     }).catch(err => {
       return res.status(404).json(err)
     })
@@ -47,13 +44,12 @@ router.post('/list-detail', (req,res,next) => {
         });
   })
 
-  //get list
+  // get one list
   router.get('/list-detail/:id', (req,res) => {
     List.findById(req.params.id)
     .populate('places')
     .populate('user')
     .then(list => {
-      // console.log(list, 'this comes from back end') works
       if (!list) return res.status(404);
       return res.status(200).json(list);
     })
@@ -62,7 +58,13 @@ router.post('/list-detail', (req,res,next) => {
     })
   })
 
-  //delete list
+  // get all lists for given city
+  // FINISH THIS ON MON
+  // router.get('/list-search', (req,res,next)=>{
+  //   List.find()
+  // })
+
+  // delete list
   router.delete('/list-detail/:id', (req,res,next)=>{
     List.findByIdAndRemove(req.params.id)
     .then(list => {

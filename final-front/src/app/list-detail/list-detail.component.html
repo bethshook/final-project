@@ -2,11 +2,15 @@
   <div class="title">
 <h2>{{list.listName}}</h2>
 <h4><b>City Expertise:</b> {{list.cityLevel}} <i class="fas fa-star"></i></h4>
-<p (click)="removeList(list._id)" *ngIf="sameUser"><button class="delete">Delete this list</button></p>
+<p (click)="removeList(list._id)" *ngIf="sameUser" class="delete-p hvr-grow">Delete this list <i class="fas fa-trash-alt left-space"></i></p>
 </div>
 
 <div class="flex-wrapper">
 <div id="manage-list">
+  <div id="save-list" *ngIf="!sameUser">
+    <button (click)="handleSave()">Save This List</button>
+  </div>
+
 <div id="foursquare-search" *ngIf="sameUser">
 <p>Search for a place to add to your list:</p>
 <input type="text" name="query" [(ngModel)]="searchInput"><br>
@@ -26,12 +30,12 @@
         <h4>{{place.name}}</h4>
         {{place.type}}
 
-        <i *ngIf="sameUser" (click)="removePlace(place._id)" class="fas fa-trash-alt hvr-grow"></i>
+        <i *ngIf="sameUser" (click)="removePlace(place._id)" class="fas fa-trash-alt hvr-grow trash-extra"></i>
       </div></div>
     </div>
   </div>
 
-<a [routerLink]="['/dashboard', list.user._id]"><button class="btn-ctr">Dashboard</button></a>
+<a [routerLink]="['/dashboard', list.user._id]"><button class="btn-ctr">Back to Profile</button></a>
 
 </div>
 

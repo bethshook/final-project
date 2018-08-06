@@ -16,9 +16,10 @@ function isAuthenticated(req,res,next){
 }
 
 router.get('/loggedUser', isAuthenticated, (req,res)=>{
-    console.log('getting logged user', req.user)
     User.findById(req.user._id)
     .populate('lists')
+    .populate('friends')
+    .populate('savedLists')
     .then(user=>{
         console.log(user)
         return res.json(user)
@@ -26,27 +27,20 @@ router.get('/loggedUser', isAuthenticated, (req,res)=>{
     .catch(e=>console.log(e))
 });
 
-//log out
-router.get('/logout', function(req, res){
-    req.logout();
-    req.session.destroy()
-    res.redirect('/');
-  });
+// sign up
+router.post('/signup', (req,res,next) => {
+    User.register(req.body, req.body.password)
+    .then(user => res.json(user))
+    .catch(e=>res.json(e))
+});
 
-router.get('/profileUser/:id', (req,res)=>{
-    User.findById(req.params.id)
-    .populate('lists')
-    .then(user=>{
-        return res.json(user)
-    }).catch(e=>console.log(e))
-})
-
-router.get('/dashboard/:id', isAuthenticated, (req,res,next)=>{
+// log in
+router.post('/login', passport.authenticate('local'), (req,res,next) => {
     User.findById(req.user._id)
     .populate('lists')
-    .then(lists=>res.json(lists))
-    .catch(e=>next(e))
-});
+    .then(user => res.json(user))
+    .catch(e => res.json(e))
+})
 
 // facebook login
 router.post('/facebook/login', passport.authenticate('facebook-token'), (req,res)=>{
@@ -58,20 +52,33 @@ router.get('/facebook/callback', passport.authenticate('facebook-token', {failur
         res.redirect('/signup')
     })
 
-router.post('/signup', (req,res,next) => {
-    User.register(req.body, req.body.password)
-    .then(user => res.json(user))
-    .catch(e=>res.json(e))
-});
+//log out
+router.get('/logout', function(req, res){
+    req.logout();
+    req.session.destroy()
+    res.redirect('/');
+  });
 
-router.post('/login', passport.authenticate('local'), (req,res,next) => {
-    User.findById(req.user._id)
+// get other user's profile
+router.get('/profileUser/:id', (req,res)=>{
+    User.findById(req.params.id)
     .populate('lists')
-    .then(user => res.json(user))
-    .catch(e => res.json(e))
+    .then(user=>{
+        return res.json(user)
+    }).catch(e=>console.log(e))
 })
 
-//   update existing user
+// get user profile
+router.get('/dashboard/:id', isAuthenticated, (req,res,next)=>{
+    User.findById(req.user._id)
+    .populate('lists')
+    .populate('friends')
+    .populate('savedLists')
+    .then(lists=>res.json(lists))
+    .catch(e=>next(e))
+});
+
+// update existing user
   router.put('/dashboard/:id', (req,res,next) => {
     User.findByIdAndUpdate(req.params.id, req.body, {new:true})
         .then(user => {
@@ -81,14 +88,36 @@ router.post('/login', passport.authenticate('local'), (req,res,next) => {
         })
   })
 
-//get users
-router.get('/users', (req, res) => {
+  // updating existing user by adding friend
+  router.put('/users/:id', (req,res,next) => {
+      User.findByIdAndUpdate(req.params.id, req.body, {new:true})
+      .then(user => {
+        return res.status(202).json(user)
+        }).catch(err => {
+        return res.status(404).json(err);
+    })
+  })
+
+// get all users
+router.get('/users/:id', (req, res) => {
     User.find()
+    .populate('lists')
         .then(users => {
             console.log(users)
             return res.status(200).json(users);
         })
         .catch(e => next(e))
     })
+
+// save list to user savedLists array
+router.put('/list-detail/:id/save', (req, res,next)=> {
+    console.log('getting user for save get', req.user)
+    User.findByIdAndUpdate(req.user._id, req.body, {new: true})
+    .then(list => {
+        return res.status(202).json(list)
+    }).catch(err => {
+        return res.status(404).json(err)
+    })
+})
 
 module.exports = router;

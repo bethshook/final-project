@@ -21,7 +21,19 @@
     background: #DD4124;
 }
 
-.fa-trash-alt{
+.delete-p{
+    margin-top: 30px;
+}
+
+.left-space{
+    margin-left: 5px;
+}
+
+.delete-p:hover{
+    cursor: pointer;
+}
+
+.trash-extra{
     cursor: pointer;
     color: #2E4A62;
     position: absolute;

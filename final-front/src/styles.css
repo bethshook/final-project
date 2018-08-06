@@ -45,6 +45,10 @@ input {
     text-decoration: none;
 }
 
+.logout{
+    margin-top: 30px;
+}
+
 .fa-star{
     color:#EFC050;
 }

@@ -121,7 +121,13 @@ export class ListDetailComponent implements OnInit {
       // if(!window.confirm('Estas seguro?')) return
       this.cityService.updateOneList(list)
       .subscribe(()=>{
-       console.log('list updated on component')
+      })
+    }
+
+    handleSave(){
+      this.currentUser.savedLists.push(this.list._id)
+      this.cityService.saveListToUser(this.list)
+      .subscribe(()=>{
       })
     }
 

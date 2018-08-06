@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
     user: '',
     listName: '',
     city: '',
-    cityLevel: 1,
+    cityLevel: Number,
     places: []
   }
 
@@ -47,14 +47,11 @@ export class DashboardComponent implements OnInit {
     this.authService.getUser(this.profUserId)
     .subscribe(user=>{
       this.profUser = user;
-      console.log(this.profUser)
     })
     this.authService.getLoggedUser()
     .subscribe(user=>{
-      console.log(user)
       this.user = user;
       this.userId = user._id;
-      console.log(this.userId, this.profUserId)
       if (this.userId === this.profUserId) {
         this.sameUser = true;
       }

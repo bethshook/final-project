@@ -16,7 +16,8 @@ import {routes} from './routes';
 import { ListDetailComponent } from './list-detail/list-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CitySurveyComponent } from './city-survey/city-survey.component';
-import { NetworkComponent } from './network/network.component'
+import { NetworkComponent } from './network/network.component';
+import { ListSearchComponent } from './list-search/list-search.component'
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NetworkComponent } from './network/network.component'
     ListDetailComponent,
     DashboardComponent,
     CitySurveyComponent,
-    NetworkComponent
+    NetworkComponent,
+    ListSearchComponent
   ],
   imports: [
     BrowserModule,
