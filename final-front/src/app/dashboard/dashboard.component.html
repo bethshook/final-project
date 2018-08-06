@@ -48,16 +48,23 @@ Whoops! Looks like you need to <a [routerLink]="['/signup']">log in</a>.
 
 <section id="saved-lists" *ngIf="sameUser">
 <h4>Saved Lists</h4>
+<h3>Your next vacation starts here.</h3>
+<a [routerLink]="['/list-search']"><button class="btn-ctr light">Find lists</button></a>
 </section>
 
     <section id="friends" *ngIf="sameUser">
         <h4>My Friends</h4>
         <h3>Get recommendations from the people you trust.</h3>
-        <div class="friend-box" *ngFor="let friend of user.friends"><a [routerLink]="['/dashboard', friend._id]">{{friend.username}}</a></div>
+        <div id="friend-container">
+        <button class="friend-box" *ngFor="let friend of user.friends" (click)="changeProf(friend)">{{friend.username}}</button>
+    </div>
         <a [routerLink]="['/users', user._id]"><button class="btn-ctr">Find friends</button></a>
     </section>
+    <div class="two-buttons"  *ngIf="!sameUser">
+    <a [routerLink]="['/dashboard', user._id]"><button>My Dashboard</button></a>
+<button (click)="handleLogout()">Log out</button>
+</div>
+<button *ngIf="sameUser" class="logout btn-ctr" (click)="handleLogout()">Log out</button>
 
-    <a [routerLink]="['/dashboard', user._id]"><button class="btn-ctr">My Dashboard</button></a>
-<p><button class="btn-ctr logout" (click)="handleLogout()">Log out</button></p>
 </div>
 

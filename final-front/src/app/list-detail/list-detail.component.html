@@ -9,6 +9,7 @@
 
     <div class="list-items">
         <div id="myList" *ngFor="let place of list.places"><div class="item">
+          <!-- <img src="{{place.img}}"> -->
           <h4>{{place.name}}</h4>
           {{place.type}}
 
@@ -19,7 +20,7 @@
 
 <div id="manage-list">
   <div id="save-list" *ngIf="!sameUser">
-    <button (click)="handleSave()">Save This List</button>
+    <button class="btn-ctr" (click)="handleSave()">Save This List</button>
   </div>
 
 <div id="foursquare-search" *ngIf="sameUser">
@@ -30,15 +31,26 @@
 </div>
 
 <div id="results" *ngFor="let result of searchResults; let i=index">
-    <img src="{{imgArray[i]}}">
- <p><b>{{result.name}}</b> - {{result.categories[0].name}} - <button (click)="handleNewPlace(result)">add</button></p>
-  <p>{{result.location.address}}</p>
+<div class="found-place">
+        <img src="{{imgArray[i]}}">
+        <div class="found-text">
+    <b>{{result.name}}</b> <br>
+      {{result.categories[0].name}}
+      <p>{{result.location.address}}</p>
+      <div class="add" (click)="handleNewPlace(result)">add to list</div>
+    </div>
   </div>
 </div>
 
+<div class="two-buttons" *ngIf="!sameUser">
 <a [routerLink]="['/dashboard', list.user._id]"><button class="btn-ctr">{{list.user.username}}'s Profile</button></a>
 
-<br><a [routerLink]="['/dashboard', currentUser._id]"><button class="btn-ctr">My Dashboard</button></a>
+<a [routerLink]="['/dashboard', currentUser._id]"><button class="btn-ctr">My Dashboard</button></a>
+</div>
+
+<div *ngIf="sameUser">
+<a [routerLink]="['/dashboard', currentUser._id]"><button class="btn-ctr logout">My Dashboard</button></a>
+</div>
 
 </div>
 

@@ -14,6 +14,7 @@ export class ListDetailComponent implements OnInit {
   placeObj: any = {
     name: '',
     type: '',
+    img: '',
     address: '',
     lat: '',
     long: ''
@@ -31,7 +32,7 @@ export class ListDetailComponent implements OnInit {
   listId: string = ''
   currentUser: any
   sameUser: Boolean = false
-  bliss = ''
+  currentListId = ''
 
   constructor(
     private foursquareService: FoursquareService,
@@ -49,14 +50,13 @@ export class ListDetailComponent implements OnInit {
     .subscribe(params=>{
       console.log(params.id)
       this.id = params.id
-      this.bliss = params.id
+      this.currentListId = params.id
       this.getPlaces()
     })
   }
 
   getPlaces = () => {
-    console.log('lol', this.bliss)
-    this.cityService.getOneList(this.bliss)
+    this.cityService.getOneList(this.currentListId)
     .subscribe(list=>{
      console.log(list)
       this.list = list
@@ -76,14 +76,21 @@ export class ListDetailComponent implements OnInit {
         console.log(this.searchResults[this.i])
         this.id = this.searchResults[this.i].id;
         // having some trouble with this API photo request
-        // this.foursquareService.getPhotos(this.id)
-        // .then(imgsrc=>{
-        //   this.imgArray.push(imgsrc)
-        // })
+        this.foursquareService.getPhotos(this.id)
+        .then(imgsrc=>{
+          this.imgArray.push(imgsrc)
+          // if (this.imgArray.length == 0) {
+          //   this.imgArray.push('http://www.richduncanconstruction.com/wp-content/uploads/2013/05/icon_square_300_knikeandfork.png', 'http://www.richduncanconstruction.com/wp-content/uploads/2013/05/icon_square_300_knikeandfork.png')
+          // }
+        })
       }
       this.imgArray = []
     })
     }
+
+    // getPhotos() = () => {
+
+    // }
 
     handleNewPlace(place){
       this.placeObj.name = place.name;
@@ -91,12 +98,12 @@ export class ListDetailComponent implements OnInit {
       this.placeObj.address = place.location.address;
       this.placeObj.lat = place.location.lat;
       this.placeObj.long = place.location.lng;
-      // this.foursquareService.getPhotos(place.id)
-      // .then(imgsrc=>{
-      //   console.log(imgsrc)
-      //   this.placeObj.img = imgsrc;
-      // })
-      this.cityService.createPlace(this.placeObj, this.bliss)
+      this.foursquareService.getPhotos(place.id)
+      .then(imgsrc=>{
+        console.log(imgsrc)
+        this.placeObj.img = imgsrc;
+      })
+      this.cityService.createPlace(this.placeObj, this.currentListId)
       .subscribe(r=>{
         console.log(r)
         this.list = r
@@ -124,7 +131,6 @@ export class ListDetailComponent implements OnInit {
     }
 
     updateList(list){
-      // if(!window.confirm('Estas seguro?')) return
       this.cityService.updateOneList(list)
       .subscribe(()=>{
       })

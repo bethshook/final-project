@@ -36,11 +36,17 @@
     <label for="password">Password:</label>
     <input type="password" name="password" [(ngModel)]="password" #myPassword="ngModel" minlength="3" required>
   </div>
+  <div class="auth-group">
+      <label for="password2">Password:</label>
+      <input type="password" name="password2" [(ngModel)]="password2" #myPassword2="ngModel" required>
+    </div>
+
   <div *ngIf="myPassword.errors && (myPassword.dirty || myPassword.touched)">
       <div class="alert alert-warning" [hidden]="!myPassword.errors.required">
         Password is required
       </div>
-      <div class="alert alert-warning" [hidden]="!myUsername.errors.required">
+    </div>
+      <div *ngIf="myUsername.errors && (myUsername.dirty || myUsername.touched)" class="alert alert-warning" [hidden]="!myUsername.errors.required">
           Username is required
         </div>
       <div class="alert alert-warning" *ngIf="myUsername.errors.minlength">
@@ -49,7 +55,11 @@
         <div class="alert alert-warning" *ngIf="myPassword.errors.minlength">
             Password must be at least 3 characters long.
           </div>
-  </div>
+
+          <div *ngIf="myPassword != myPassword2 && (myPassword2.dirty || myPassword2.touched)" class="alert alert-warning" [hidden]="!myUsername.errors.required">
+              Username is required
+            </div>
+
 
     <br>
     <button class="auth-button" (click)='handleSignup()'>Sign Up</button>

@@ -8,7 +8,7 @@
     flex-flow: row wrap;
 }
 
-h2{
+h2,h3{
     text-align: center;
 }
 
@@ -21,4 +21,14 @@ h2{
 
 .user button{
     margin: 0 10px;
+}
+
+ul, li{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.fa-map-marker-alt{
+    color: #2E4A62;
 }

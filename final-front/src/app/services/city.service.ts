@@ -31,7 +31,6 @@ export class CityService {
 
   //get list
     getOneList(id){
-      // console.log('service has id', id) this works
       return this.http.get(this.url + 'list-detail/' + id)
           .pipe(map((res: Response)=>res.json()));
   }
@@ -44,27 +43,27 @@ export class CityService {
 
   //edit list from survey
   updateListFromSurvey(list){
-    console.log('service', list)
     return this.http.put(this.url + 'city-survey/' + list._id, list)
     .pipe(map((res: Response)=>res.json()))
   }
 
+ // post searched city to get all matching lists
+  getByCity(city){
+  return this.http.post(this.url + 'list-search', city).toPromise()
+  .then((res: Response)=> res.json())
+    .catch(e=>console.log(e))
+}
+
   // save list to a user
   saveListToUser(list){
-    return this.http.put(this.url + 'list-detail/' + list._id + '/save')
-    .pipe(map((res: Response)=>res.json()))
+    // return this.http.put(this.url + 'list-detail/' + list._id + '/save')
+    // .pipe(map((res: Response)=>res.json()))
   }
 
   // delete list
   deleteList(id){
     return this.http.delete(this.url + 'list-detail/' + id)
     .pipe(map((res:Response)=>res.json()))
-  }
-
-  // search friend lists by city
-  getByCity(city){
-    return this.http.get(this.url + 'list-search', city)
-    .pipe(map((res: Response)=>res.json()))
   }
 
 

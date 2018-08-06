@@ -13,7 +13,7 @@ export class ListSearchComponent implements OnInit {
   searchInput: string = ''
 
   constructor(
-    private cityService: CityService;
+    private cityService: CityService
   ) { }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class ListSearchComponent implements OnInit {
   search() {
     this.cityService.getByCity(this.searchInput)
     .then(lists=>{
-      this.searchResults = lists;
+      console.log(lists)
     })
   }
 

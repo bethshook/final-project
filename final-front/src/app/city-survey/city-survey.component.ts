@@ -47,13 +47,17 @@ export class CitySurveyComponent implements OnInit {
     this.activeRoute.params
     .subscribe(params=>{
       this.id = params.id
-      this.cityService.getOneList(this.id)
+      this.getCurrentList()
+    })
+  }
+
+  getCurrentList = () => {
+  this.cityService.getOneList(this.id)
       .subscribe(list=>{
         this.list = list
         this.currentCity = this.list.city
       })
-    })
-  }
+    }
 
   handleSurvey(){
     for (var item in this.cityExp) {

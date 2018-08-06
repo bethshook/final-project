@@ -1,14 +1,16 @@
-<div id="manage-list">
+<div class="form-container">
+
   <div id="city-search">
-  <p>Search for a place to add to your list:</p>
+  <p>Search for a city to find lists by friends</p>
   <input type="text" name="query" [(ngModel)]="searchInput"><br>
   <button id="button" (click)="search()">Search</button>
 
   </div>
 
-  <div id="results" *ngFor="let result of searchResults; let i=index">
-      <img src="{{imgArray[i]}}">
-   <p><b>{{result.name}}</b> - {{result.categories[0].name}} - <button (click)="handleNewPlace(result)">add</button></p>
-    <p>{{result.location.address}}</p>
+  <div id="results" *ngFor="let result of searchResults">
+   <p><b>{{result.listName}}</b>
     </div>
+
   </div>
+
+  <a [routerLink]="['/dashboard', user._id]"><button class="btn-ctr">Dashboard</button></a>

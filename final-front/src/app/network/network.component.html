@@ -4,8 +4,8 @@
 <div id="flex-container">
 <div class="user" *ngFor="let user of users">
 <h3>{{user.username}}</h3>
-<br>
-<p *ngFor="let list of user.lists">{{list.city}}</p>
+Has lists for:<br>
+<ul *ngFor="let list of user.lists"><li><i class="fas fa-map-marker-alt"></i> {{list.city}}</li></ul>
 <br>
 <a [routerLink]="['/dashboard', user._id]"><button>View Profile</button></a><button (click)="handleNewFriend(user)">Connect</button>
 </div>

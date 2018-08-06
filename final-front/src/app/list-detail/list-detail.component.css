@@ -1,3 +1,13 @@
+.add{
+    font-size: .8em;
+    border-radius: 5px;
+    background: #DD4124;
+    width: 100px;
+    color: white;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
 .title{
     text-align: center;
     padding: 50px 0 20px 0;
@@ -62,4 +72,41 @@
 
 .btn-ctr{
     margin-top: 40px;
+}
+
+#results{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.found-place{
+    max-width: 750px;
+    margin: 20px auto;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+
+.result-text{
+    margin: 20px;
+    text-align: left;
+}
+
+.found-place img{
+    float: left;
+    margin-right: 10px;
+}
+
+.found-text {
+    font-size: 1.2em;
+}
+
+.two-buttons{
+    max-width: 350px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
 }

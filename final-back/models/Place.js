@@ -9,7 +9,6 @@ const placeSchema = new Schema({
     long: String,
     img: String,
     // will there be maps?
-    // not sure it's necessary to have lists here
     list: {
         type: Schema.Types.ObjectId,
         ref: 'List'

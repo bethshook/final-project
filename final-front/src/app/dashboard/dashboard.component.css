@@ -54,9 +54,10 @@ a:hover{
     padding: 30px;
     background: white;
     color: black;
+    margin-bottom: 30px;
 }
 
-#friends h3{
+#friends h3, #saved-lists h3{
     font-size: 1.4em;
     margin: 0 0 30px 0;
     text-align: center;
@@ -66,11 +67,33 @@ a:hover{
     color:#2E4A62;
     margin-bottom: 20px;
 }
+#friend-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 400px;
+    margin: 20px auto;
+}
+
+.friend-box{
+    margin: 3px 8px;
+    background: #2E4A62;
+    color:white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    min-width: 80px;
+}
+
+.friend-box a{
+    color: white;
+    text-decoration: none;
+}
 
 #saved-lists{
     padding: 30px;
     background:#2E4A62;
-
+    color: white;
 }
 
 #welcome-box{
@@ -165,4 +188,21 @@ a:hover{
 
 .fa-star{
     font-size: 1.4em;
+}
+
+.two-buttons{
+    max-width: 350px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.logout{
+    margin-bottom: 30px;
+}
+
+.light:hover{
+    background:#cbdae7;
 }

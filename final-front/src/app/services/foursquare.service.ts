@@ -23,11 +23,12 @@ export class FoursquareService {
   }
 
   getPhotos(id){
-    return this.http.get(this.photoUrl + id + '/photos?&client_id=ICBF3ADA41FDWYCLTDTHH0Q31KJ3UZWS0ZMHNDVXSZF4LYBQ&client_secret=FNIYZJGMA0OPC2JR0SQM4CIFP0JS2FNZ5RHZ1ZYLY1OHDF4X&v=20180730').toPromise()
+    return this.http.get(this.photoUrl + id + '/photos?&limit=2&client_id=ICBF3ADA41FDWYCLTDTHH0Q31KJ3UZWS0ZMHNDVXSZF4LYBQ&client_secret=FNIYZJGMA0OPC2JR0SQM4CIFP0JS2FNZ5RHZ1ZYLY1OHDF4X&v=20180730').toPromise()
     .then((res: Response)=>res.json())
     .then(photos=>{
+      console.log(photos)
       let prefix = photos.response.photos.items[1].prefix;
-      let size = 'height100';
+      let size = 'width300';
       let suffix = photos.response.photos.items[1].suffix;
       return prefix + size + suffix;
     })

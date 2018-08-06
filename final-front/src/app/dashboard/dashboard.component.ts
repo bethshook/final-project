@@ -84,5 +84,9 @@ handleCity(){
     this.router.navigate(['signup'])
   }
 
+  changeProf(friend){
+    this.router.navigate(['/dashboard', friend._id])
+  }
+
 }
 
