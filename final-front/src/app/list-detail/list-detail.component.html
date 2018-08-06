@@ -6,6 +6,17 @@
 </div>
 
 <div class="flex-wrapper">
+
+    <div class="list-items">
+        <div id="myList" *ngFor="let place of list.places"><div class="item">
+          <h4>{{place.name}}</h4>
+          {{place.type}}
+
+          <i *ngIf="sameUser" (click)="removePlace(place._id)" class="fas fa-trash-alt hvr-grow trash-extra"></i>
+        </div></div>
+      </div>
+    </div>
+
 <div id="manage-list">
   <div id="save-list" *ngIf="!sameUser">
     <button (click)="handleSave()">Save This List</button>
@@ -25,17 +36,9 @@
   </div>
 </div>
 
-  <div class="list-items">
-      <div id="myList" *ngFor="let place of list.places"><div class="item">
-        <h4>{{place.name}}</h4>
-        {{place.type}}
+<a [routerLink]="['/dashboard', list.user._id]"><button class="btn-ctr">{{list.user.username}}'s Profile</button></a>
 
-        <i *ngIf="sameUser" (click)="removePlace(place._id)" class="fas fa-trash-alt hvr-grow trash-extra"></i>
-      </div></div>
-    </div>
-  </div>
-
-<a [routerLink]="['/dashboard', list.user._id]"><button class="btn-ctr">Back to Profile</button></a>
+<br><a [routerLink]="['/dashboard', currentUser._id]"><button class="btn-ctr">My Dashboard</button></a>
 
 </div>
 

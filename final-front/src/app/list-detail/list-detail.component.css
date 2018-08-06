@@ -1,6 +1,6 @@
 .title{
     text-align: center;
-    padding: 50px 0;
+    padding: 50px 0 20px 0;
 }
 
 .container{
@@ -9,9 +9,11 @@
 }
 
 .flex-wrapper{
-    display: flex;
+    /* display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-between; */
+    max-width: 450px;
+    margin: 0 auto;
 }
 
 .delete {
@@ -44,13 +46,19 @@
 .item {
     background: white;
     padding: 20px 30px;
-    margin: 5px 0;
+    margin: 5px auto;
     position: relative;
 }
 
 .list-items{
-    width: 55%;
+    margin: 0 auto;
 }
+
+#foursquare-search{
+    margin: 30px auto;
+    text-align: center;
+}
+
 
 .btn-ctr{
     margin-top: 40px;

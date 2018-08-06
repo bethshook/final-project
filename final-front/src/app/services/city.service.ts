@@ -18,8 +18,8 @@ export class CityService {
   }
 
   //create place
-  createPlace(place): Observable<string>{
-    return this.http.post(this.url + 'list-detail', place)
+  createPlace(place, listId): Observable<string>{
+    return this.http.post(this.url + `list-detail/${listId}`, place)
     .pipe(map((res: Response)=>res.json()))
   }
 

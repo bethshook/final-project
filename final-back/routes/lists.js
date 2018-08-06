@@ -5,15 +5,6 @@ const Place     = require('../models/Place');
 const List      = require('../models/List')
 const User      = require('../models/User')
 
-
-// post new place
-router.post('/list-detail', (req,res,next) => {
-    console.log(req.body)
-    Place.create(req.body)
-    .then(place => res.json(place))
-    .catch(e=>res.json(e))
-  });
-
   // post new list
   router.post('/dashboard', (req,res,next) => {
     List.create(req.body)
@@ -35,7 +26,6 @@ router.post('/list-detail', (req,res,next) => {
 
   // edit existing list
   router.put('/list-detail/:id', (req,res,next) => {
-    console.log('editing list on backend')
     List.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(list => {
             return res.status(202).json(list)
@@ -75,16 +65,5 @@ router.post('/list-detail', (req,res,next) => {
     })
   })
 
-  //delete place
-  // router.delete('/delete-place/:id', (req,res,next) => {
-  //   Place.findByIdAndRemove(req.params.id)
-  //   .then(place => {
-  //     res.status(200).json(phone)
-  //   })
-  //   .catch(e=>{
-  //     res.status(500).json({message:"Something went wrong."})
-  //     next(e)
-  //   })
-  // })
 
   module.exports = router;

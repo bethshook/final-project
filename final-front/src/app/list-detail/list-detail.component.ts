@@ -27,10 +27,11 @@ export class ListDetailComponent implements OnInit {
   i: number = 0;
   id: string = ''
   imgSrc: any
-  list: any
+  list: any = {}
   listId: string = ''
   currentUser: any
   sameUser: Boolean = false
+  bliss = ''
 
   constructor(
     private foursquareService: FoursquareService,
@@ -48,15 +49,22 @@ export class ListDetailComponent implements OnInit {
     .subscribe(params=>{
       console.log(params.id)
       this.id = params.id
-      this.cityService.getOneList(this.id)
-      .subscribe(list=>{
-       console.log(list)
-        this.list = list
-        this.listId = list._id
-        if (this.currentUser._id === this.list.user._id) {
-          this.sameUser = true;
-        }
-      })
+      this.bliss = params.id
+      this.getPlaces()
+    })
+  }
+
+  getPlaces = () => {
+    console.log('lol', this.bliss)
+    this.cityService.getOneList(this.bliss)
+    .subscribe(list=>{
+     console.log(list)
+      this.list = list
+      console.log(list)
+      this.listId = list._id
+      if (this.currentUser._id === this.list.user._id) {
+        this.sameUser = true;
+      }
     })
   }
 
@@ -83,17 +91,15 @@ export class ListDetailComponent implements OnInit {
       this.placeObj.address = place.location.address;
       this.placeObj.lat = place.location.lat;
       this.placeObj.long = place.location.lng;
-      this.foursquareService.getPhotos(place.id)
-      .then(imgsrc=>{
-        this.placeObj.img = imgsrc;
-      })
-      this.cityService.createPlace(this.placeObj)
+      // this.foursquareService.getPhotos(place.id)
+      // .then(imgsrc=>{
+      //   console.log(imgsrc)
+      //   this.placeObj.img = imgsrc;
+      // })
+      this.cityService.createPlace(this.placeObj, this.bliss)
       .subscribe(r=>{
-        this.placeId = r._id;
-        console.log(this.placeId)
-        this.list.places.push(this.placeId);
-        console.log(this.list.places) // this works, array is full
-        this.updateList(this.list)
+        console.log(r)
+        this.list = r
       })
     }
 

@@ -10,10 +10,10 @@ const placeSchema = new Schema({
     img: String,
     // will there be maps?
     // not sure it's necessary to have lists here
-    lists: [{
+    list: {
         type: Schema.Types.ObjectId,
         ref: 'List'
-    }]
+    }
 })
 
 module.exports = mongoose.model('Place', placeSchema)

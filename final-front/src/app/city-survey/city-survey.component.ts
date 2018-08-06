@@ -46,7 +46,6 @@ export class CitySurveyComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.activeRoute.params
     .subscribe(params=>{
-      console.log(params.id)
       this.id = params.id
       this.cityService.getOneList(this.id)
       .subscribe(list=>{
@@ -79,6 +78,7 @@ export class CitySurveyComponent implements OnInit {
           this.updateList(this.list);
           this.router.navigate(['list-detail', this.list._id]);
       }
+      console.log(this.cityLevel)
     }
     }
 
