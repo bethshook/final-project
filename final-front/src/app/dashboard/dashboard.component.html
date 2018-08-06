@@ -1,40 +1,62 @@
 <div *ngIf="!user">
 Whoops! Looks like you need to <a [routerLink]="['/signup']">log in</a>.
-
 </div>
 
 <div *ngIf="user">
     <section id="welcome">
-<h2>Hi, {{user.username}}.</h2>
-<p>Your city expertise:</p>
+        <div id="welcome-box">
+<h2 *ngIf="sameUser">Hi, {{profUser.username}}.</h2>
+<h2 *ngIf="!sameUser">{{profUser.username}}'s Profile</h2>
+<div *ngIf="sameUser">
+<h3>Where will you go next?</h3>
+<p class="left">Find your friends' favorite places.</p>
+<button>Search by city</button>
+</div>
+</div>
+
+
+
+<div id="my-cities">
+<p *ngIf="sameUser">Your city expertise:</p>
+<p *ngIf="!sameUser">{{profUser.username}}'s city expertise:</p>
+
 <div class="grid">
-    <div class="city" *ngFor="let list of user.lists">
-        <b>{{list.city}}:</b> {{list.cityLevel}} <i class="fas fa-star"></i>
+    <div class="city hvr-grow" *ngFor="let list of profUser.lists">
+            <a [routerLink]="['/list-detail', list._id]">
+        <b>{{list.city}}:</b> {{list.cityLevel}} <i class="fas fa-star"></i></a>
     </div>
 </div>
-<p>Add a city and begin building your list.<br />
-    <input placeholder="City name" [(ngModel)]="newCity" type="text"><button (click)="handleCity()">Add</button></p>
+<div *ngIf="sameUser">Add a city and begin building your list of tips.<br />
+    <input placeholder="City name" [(ngModel)]="newCity" type="text" required minlength="1"><button (click)="handleCity()">Add</button></div>
+
+</div>
 </section>
 
 <section id="my-lists">
 
-<h4>My Lists</h4>
+<h4 *ngIf="sameUser">My Lists</h4>
+<h4 *ngIf="!sameUser">{{profUser.username}}'s Lists</h4>
+
 <div class="grid">
-<div class="list" *ngFor="let list of user.lists">
-    <b>{{list.listName}}</b>
-    <br>
-    <a [routerLink]="['/list-detail', list._id]"><button class="btn-ctr">View List</button></a>
+<div class="list" *ngFor="let list of profUser.lists">
+   <div class="list-deets"><b>{{list.listName}}</b></div>
+    <a [routerLink]="['/list-detail', list._id]"><div class="list-button">view list</div></a>
     </div>
 </div>
 
 </section>
 
-<section>
+<section id="saved-lists" *ngIf="sameUser">
 <h4>Saved Lists</h4>
-
-
-    <div class="friends"><h4>My Friends</h4></div>
 </section>
 
+    <section id="friends">
+        <h4>My Friends</h4>
+        <h3>Get recommendations from the people you trust.</h3>
+        <a [routerLink]="['/users']"><button class="btn-ctr">Find friends</button></a>
+    </section>
+
+
 <p><button class="btn-ctr" (click)="handleLogout()">Log out</button></p>
+</div>
 

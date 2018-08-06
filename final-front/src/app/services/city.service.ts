@@ -49,11 +49,17 @@ export class CityService {
     .pipe(map((res: Response)=>res.json()))
   }
 
+  //delete list
+  deleteList(id){
+    return this.http.delete(this.url + 'list-detail/' + id)
+    .pipe(map((res:Response)=>res.json()))
+  }
+
 
   //delete place
   //need to be sure I'm deleting PLACEID and not LISTID
-  // deletePlace(placeId, listId){
-  //   return this.http.delete(this.url + 'list-detail/' + listId, placeId)
+  // deletePlace(placeId, list){
+  //   return this.http.delete(this.url + 'delete-place' + placeId, list)
   //   .pipe(map((res: Response)=>res.json()))
   // }
 

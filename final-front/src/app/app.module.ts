@@ -15,7 +15,8 @@ import {CityService} from './services/city.service'
 import {routes} from './routes';
 import { ListDetailComponent } from './list-detail/list-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CitySurveyComponent } from './city-survey/city-survey.component'
+import { CitySurveyComponent } from './city-survey/city-survey.component';
+import { NetworkComponent } from './network/network.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CitySurveyComponent } from './city-survey/city-survey.component'
     SignupComponent,
     ListDetailComponent,
     DashboardComponent,
-    CitySurveyComponent
+    CitySurveyComponent,
+    NetworkComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { FoursquareService } from '../services/foursquare.service';
 import { CityService } from '../services/city.service';
 import { CitySurveyComponent } from '../city-survey/city-survey.component'
@@ -28,17 +28,22 @@ export class ListDetailComponent implements OnInit {
   id: string = ''
   imgSrc: any
   list: any
+  listId: string = ''
+  currentUser: any
+  sameUser: Boolean = false
 
   constructor(
     private foursquareService: FoursquareService,
     private cityService: CityService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   @Input() citySurvey: CitySurveyComponent;
   @Input('city') newCity: string;
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.activeRoute.params
     .subscribe(params=>{
       console.log(params.id)
@@ -47,6 +52,10 @@ export class ListDetailComponent implements OnInit {
       .subscribe(list=>{
        console.log(list)
         this.list = list
+        this.listId = list._id
+        if (this.currentUser._id === this.list.user._id) {
+          this.sameUser = true;
+        }
       })
     })
   }
@@ -88,8 +97,24 @@ export class ListDetailComponent implements OnInit {
       })
     }
 
-    removePlace(id){
-      // this.cityService.deletePlace(id, this.id)
+    removeList(id){
+      if(!window.confirm('Are you sure you want to delete this list?')) return
+      this.cityService.deleteList(id)
+      .subscribe(()=>{
+        this.router.navigate(['dashboard', this.list.user._id])
+      })
+    }
+
+    removePlace(placeId){
+      if(!window.confirm('Are you sure you want to delete this list item?')) return
+      let placeIndex = -1;
+      for (let i=0; i<this.list.places.length; i++) {
+        if (placeId === this.list.places[i]._id) {
+          placeIndex = i;
+          this.list.places.splice(placeIndex,1)
+        }
+      }
+      this.updateList(this.list)
     }
 
     updateList(list){

@@ -1,21 +1,37 @@
-<h3>Name: {{list.listName}}</h3>
-<p>{{list.user.username}}'s expertise for <b>{{list.city}}:</b> {{list.cityLevel}} <i class="fas fa-star"></i></p>
+<div class="container">
+  <div class="title">
+<h2>{{list.listName}}</h2>
+<h4><b>City Expertise:</b> {{list.cityLevel}} <i class="fas fa-star"></i></h4>
+<p (click)="removeList(list._id)" *ngIf="sameUser"><button class="delete">Delete this list</button></p>
+</div>
 
-<div id="foursquare-search">
+<div class="flex-wrapper">
+<div id="manage-list">
+<div id="foursquare-search" *ngIf="sameUser">
 <p>Search for a place to add to your list:</p>
-<input type="text" name="query" [(ngModel)]="searchInput">
+<input type="text" name="query" [(ngModel)]="searchInput"><br>
 <button id="button" (click)="search()">Search</button>
 
 </div>
 
 <div id="results" *ngFor="let result of searchResults; let i=index">
     <img src="{{imgArray[i]}}">
- <p><b>{{result.name}}</b> - {{result.categories[0].name}} - <span (click)="handleNewPlace(result)">add to list</span></p>
+ <p><b>{{result.name}}</b> - {{result.categories[0].name}} - <button (click)="handleNewPlace(result)">add</button></p>
   <p>{{result.location.address}}</p>
   </div>
+</div>
 
-  <ul>
-  <ul id="myList" *ngFor="let place of list.places"><li>{{place.name}} - <span (click)="removePlace(place._id)">delete</span></li></ul></ul>
+  <div class="list-items">
+      <div id="myList" *ngFor="let place of list.places"><div class="item">
+        <h4>{{place.name}}</h4>
+        {{place.type}}
 
-  <p><a [routerLink]="['/dashboard', list.user._id]">Back to dashboard</a></p>
+        <i *ngIf="sameUser" (click)="removePlace(place._id)" class="fas fa-trash-alt hvr-grow"></i>
+      </div></div>
+    </div>
+  </div>
+
+<a [routerLink]="['/dashboard', list.user._id]"><button class="btn-ctr">Dashboard</button></a>
+
+</div>
 

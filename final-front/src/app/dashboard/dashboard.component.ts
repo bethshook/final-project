@@ -20,12 +20,16 @@ export class DashboardComponent implements OnInit {
   user: any
   listId: string = ''
   userId: string = ''
+  profUserId: string = ''
+  profUser: any
+  sameUser: Boolean = false
+  fbUser: any
 
   listObj: any = {
     user: '',
     listName: '',
     city: '',
-    cityLevel: '',
+    cityLevel: 1,
     places: []
   }
 
@@ -36,12 +40,25 @@ export class DashboardComponent implements OnInit {
     private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activeRoute.params
+    .subscribe(params=>{
+      this.profUserId = params.id;
+    })
+    this.authService.getUser(this.profUserId)
+    .subscribe(user=>{
+      this.profUser = user;
+      console.log(this.profUser)
+    })
     this.authService.getLoggedUser()
     .subscribe(user=>{
       console.log(user)
-      this.user = user
+      this.user = user;
+      this.userId = user._id;
+      console.log(this.userId, this.profUserId)
+      if (this.userId === this.profUserId) {
+        this.sameUser = true;
+      }
       })
-
     }
 
 handleCity(){
@@ -66,6 +83,7 @@ handleCity(){
 
   handleLogout(){
     this.authService.logout()
+    // this.authService.newLogout()
     this.router.navigate(['signup'])
   }
 

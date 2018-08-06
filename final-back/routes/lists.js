@@ -62,16 +62,27 @@ router.post('/list-detail', (req,res,next) => {
     })
   })
 
-  //delete place
-  router.delete('/list-detail/:id', (req,res,next) => {
-    Place.findByIdAndRemove(req.params.id)
-    .then(place => {
-      res.status(200).json(phone)
-    })
-    .catch(e=>{
-      res.status(500).json({message:"Something went wrong."})
+  //delete list
+  router.delete('/list-detail/:id', (req,res,next)=>{
+    List.findByIdAndRemove(req.params.id)
+    .then(list => {
+      res.status(200).json(list)
+    }).catch(e=>{
+      res.status(500).json({message: 'Something went wrong.'})
       next(e)
     })
   })
+
+  //delete place
+  // router.delete('/delete-place/:id', (req,res,next) => {
+  //   Place.findByIdAndRemove(req.params.id)
+  //   .then(place => {
+  //     res.status(200).json(phone)
+  //   })
+  //   .catch(e=>{
+  //     res.status(500).json({message:"Something went wrong."})
+  //     next(e)
+  //   })
+  // })
 
   module.exports = router;

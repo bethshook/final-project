@@ -2,14 +2,11 @@ const passport = require('passport');
 const User = require('../models/User');
 var FacebookTokenStrategy = require('passport-facebook-token')
 
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
 // facebook strategy
 passport.use(new FacebookTokenStrategy({
     clientID: '228596131187608',
-    clientSecret: 'bb9a262000ecccdb200333b3935fba90'
+    clientSecret: 'bb9a262000ecccdb200333b3935fba90',
+    callbackURL: 'http://localhost:3000/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
     User.findOne({facebookId: profile.id})
     .then(user=>{
@@ -27,5 +24,9 @@ passport.use(new FacebookTokenStrategy({
     .catch(e=>next(e))
     }
 ));
+
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 module.exports = passport;

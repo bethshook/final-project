@@ -46,7 +46,7 @@ export class FirebaseService {
     })
     .then(res=>{
       console.log(res);
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['dashboard', res._id]);
     })
   }
 

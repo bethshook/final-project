@@ -1,4 +1,45 @@
-#foursquare-search, #results{
-    width: 66%;
+.title{
+    text-align: center;
+    padding: 50px 0;
+}
+
+.container{
+    width: 100%;
     margin: 0 auto;
+}
+
+.flex-wrapper{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.delete {
+    font-size: .9em;
+    border-radius: 5px;
+    padding: 5px 8px;
+    background: #DD4124;
+}
+
+.fa-trash-alt{
+    cursor: pointer;
+    color: #2E4A62;
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+}
+
+.item {
+    background: white;
+    padding: 20px 30px;
+    margin: 5px 0;
+    position: relative;
+}
+
+.list-items{
+    width: 55%;
+}
+
+.btn-ctr{
+    margin-top: 40px;
 }

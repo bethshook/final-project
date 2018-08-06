@@ -1,23 +1,90 @@
 section{
-    max-width: 90%;
+    width: 100%;
     margin: 0 auto;
-    padding: 30px;
 }
 
 input {
     margin-right: 20px;
 }
 
+h2{
+    font-size: 3em;
+    text-align: left;
+    padding-top: 30px;
+}
+
+h3{
+    text-align: left;
+}
+
+h4{
+    font-family: 'Satisfy', cursive;
+    text-align: center;
+    font-size: 4em;
+    color:white;
+}
+
 a:hover{
     text-decoration: none;
 }
 
+.left{
+    text-align: left;
+    margin: 20px 0 0 0;
+}
+
 #welcome{
    text-align: center;
+   background:white;
+   display: flex;
+   justify-content: space-between;
+   flex-flow: row wrap;
 }
 
 #my-lists{
+    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('../../assets/images/trip-planning-unsplash.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 30px;
+}
+
+#friends{
+    padding: 30px;
     background: white;
+    color: black;
+}
+
+#friends h3{
+    font-size: 1.4em;
+    margin: 0 0 30px 0;
+    text-align: center;
+}
+
+#friends h4{
+    color:#2E4A62;
+    margin-bottom: 20px;
+}
+
+#saved-lists{
+    padding: 30px;
+    background:#2E4A62;
+
+}
+
+#welcome-box{
+    padding: 30px 100px;
+}
+
+#my-cities{
+    width: 50%;
+    padding: 60px 30px 30px 30px;
+    /* background: #cbdae7; */
+}
+
+#my-cities p{
+    margin: 0;
 }
 
 .grid{
@@ -26,12 +93,23 @@ a:hover{
     width: 90%;
     margin: 0 auto;
     justify-content: center;
-    padding: 20px 0;
+    padding: 10px 0 30px 0;
 }
 
 .city{
-    padding: 20px;
+    padding: 8px 10px;
     border-right: 1px #B0B0B0 solid;
+    background-color: #cbdae7;
+    border-radius: 5px;
+    margin: 0 20px 10px 0;
+}
+
+.city a{
+    color: black;
+}
+
+.city a:hover{
+    color:black;
 }
 
 .city:last-child{
@@ -40,9 +118,39 @@ a:hover{
 
 .list{
     max-width: 300px;
-    padding: 20px;
     background: #cbdae7;
     margin: 10px;
+    display: flex;
+    height: 100px;
+}
+
+.list-button{
+    height: 100%;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    background: #9a325f;
+    width: 100px;
+    color: white;
+    padding: 25px;
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    vertical-align: center;
+}
+
+.list-button a{
+    text-decoration: none;
+}
+
+.list-button:hover{
+    background:#2E4A62;
+}
+
+.list-deets{
+    padding: 25px;
 }
 
 .fa{
@@ -57,13 +165,4 @@ a:hover{
 
 .fa-star{
     font-size: 1.4em;
-}
-
-.fa-star{
-    color:#EFC050;
-}
-
-.btn-ctr{
-    margin: 0 auto;
-    display:block;
 }

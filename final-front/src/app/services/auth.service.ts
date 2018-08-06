@@ -21,7 +21,6 @@ export class AuthService {
     .pipe(map(res=>res.json()))
   }
 
-  //from Pablo
   getLoggedUser(){
     return this.http.get(this.url + 'loggedUser', {withCredentials:true})
     .pipe(map(res=>{
@@ -33,14 +32,30 @@ export class AuthService {
     localStorage.removeItem('user')
   }
 
+  // newLogout(){
+  //   localStorage.removeItem('user')
+  //   return this.http.get(this.url + 'logout/')
+  //   .pipe(map(res=>{
+  //     return res.json()
+  //   }))
+  // }
+
   updateUser(user) {
     return this.http.put(this.url + 'dashboard/' + user._id, user)
     .pipe(map((res: Response)=>res.json()))
   }
 
-  // getUser(user){
-  //   return this.http.get(this.url + 'dashboard/' + user._id, user)
-  //   .pipe(map((res: Response)=>res.json()))
-  // }
+  //get one user
+  getUser(id){
+    return this.http.get(this.url + 'profileUser/' + id)
+    .pipe(map((res: Response)=>res.json()))
+  }
+
+  //get all users
+  getAllUsers(){
+    return this.http.get(this.url + 'users').toPromise()
+    .then((res: Response)=> res.json())
+    .catch(e=>console.log(e))
+}
 
 }

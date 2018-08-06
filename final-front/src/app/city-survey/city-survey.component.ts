@@ -76,7 +76,6 @@ export class CitySurveyComponent implements OnInit {
               this.cityLevel = 1;
       }
           this.list.cityLevel = this.cityLevel;
-          console.log('after ranking', this.list);
           this.updateList(this.list);
           this.router.navigate(['list-detail', this.list._id]);
       }

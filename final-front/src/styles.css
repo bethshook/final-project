@@ -15,9 +15,54 @@ button {
     color: white;
     padding: 8px 26px;
     border: none;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+
+button:hover{
+    background:#2E4A62;
 }
 
 input {
     margin: 5px 0;
     padding: 3px;
+}
+
+.navbar-brand{
+    font-family: 'Satisfy', cursive;
+    font-size: 1.8em;
+    margin-left: 20px;
+}
+
+.btn-ctr{
+    display:block;
+    margin: 0 auto;
+}
+
+.btn-ctr a, a:hover{
+    text-decoration: none;
+}
+
+.fa-star{
+    color:#EFC050;
+}
+
+/* Grow */
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+    transform: scale(1.1);
 }
